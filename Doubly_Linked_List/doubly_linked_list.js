@@ -82,8 +82,40 @@ class DoublyLinkedList {
     return this;
   }
 
+  get(idx) {
+
+    if(idx < 0 || idx >= this.length) return null;
+
+    var count, current;
+
+    if(idx <= this.length / 2) {
+      count = 0;
+      current = this.head;
+      while(count !== idx) {
+        current = current.next;
+        count++;
+      }
+    } else {
+      count = this.length - 1;
+      current = this.tail;
+      while(count !== idx) {
+        current = current.prev;
+        count--;
+      }
+    }
+
+    return currentNode;
+  }
 
 }
 
 let list = new DoublyLinkedList();
+list.push(1)
+list.push(2)
+list.push(3)
+list.push(4);
+console.log(list);
+
+let item = list.get(2);
+console.log(item);
 
