@@ -31,8 +31,10 @@ class DoublyLinkedList {
   }
 
   pop() {
-    if(!this.tail) return undefined;
+    if(!this.head) return undefined;
+
     var poppedNode = this.tail;
+
     if(this.length === 1) {
       this.head = null;
       this.tail = null;
@@ -51,8 +53,4 @@ class DoublyLinkedList {
 }
 
 let list = new DoublyLinkedList();
-let node = new Node(78);
-list.push(node);
-console.log(list);
-list.push(11);
-console.log(list)
+list.pop();
