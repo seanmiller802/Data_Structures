@@ -133,7 +133,22 @@ class DoublyLinkedList {
     afterNode.prev = newNode;
     this.length++;
     return true;
-    
+
+  }
+
+  remove(idx) {
+    if(idx < 0 || idx >= this.length) return false; 
+    if(idx === 0) return this.shift();
+    if(idx === this.length - 1) return this.pop();
+    var removedNode = this.get(idx);
+    var beforeNode = removedNode.prev;
+    var afterNode = removedNode.next;
+    beforeNode.next = afterNode;
+    afterNode.prev = beforeNode;
+    removedNode.next = null;
+    removedNode.prev = null;
+    this.length--;
+    return removedNode;
   }
 
 }
