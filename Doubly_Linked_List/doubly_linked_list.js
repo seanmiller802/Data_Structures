@@ -119,15 +119,23 @@ class DoublyLinkedList {
     return false;
   }
 
+  insert(idx, val) {
+
+    if(idx < 0 || idx > this.length) return false;
+    if(idx === 0) return this.unshift(val);
+    if(idx === this.length) return this.push(val);
+    var newNode = new Node(val);
+    var beforeNode = this.get(idx - 1);
+    var afterNode = beforeNode.next;
+    beforeNode.next = newNode;
+    newNode.prev = beforeNode;
+    newNode.next = afterNode;
+    afterNode.prev = newNode;
+    this.length++;
+    return true;
+    
+  }
+
 }
 
 let list = new DoublyLinkedList();
-list.push(1)
-list.push(2)
-list.push(3)
-list.push(4);
-console.log(list);
-
-list.set(1, 'hello');
-
-console.log(list);
