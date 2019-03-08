@@ -104,7 +104,19 @@ class DoublyLinkedList {
       }
     }
 
-    return currentNode;
+    return current;
+  }
+
+  set(idx, val) {
+
+    var foundNode = this.get(idx);
+
+    if(foundNode != null) {
+      foundNode.val = val;
+      return true;
+    }
+
+    return false;
   }
 
 }
@@ -116,6 +128,6 @@ list.push(3)
 list.push(4);
 console.log(list);
 
-let item = list.get(2);
-console.log(item);
+list.set(1, 'hello');
 
+console.log(list);
