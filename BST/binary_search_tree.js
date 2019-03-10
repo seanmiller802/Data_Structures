@@ -91,9 +91,27 @@ class BinarySearchTree {
       return visited;
     }
 
+    DFSPreOrder() {
+      var visited = [];
+      var current = this.root;
+
+      const traverse = (node) => {
+        visited.push(node.value);
+        if(node.left) {
+          traverse(node.left);
+        }
+        if(node.right) {
+          traverse(node.right);
+        }
+      }
+
+      traverse(current);
+      console.log("VISITED NODES ARE", visited);
+      return visited;
+
+    }
 
 }
-
 
 //      10
 //   5     13
@@ -107,7 +125,7 @@ tree.insert(3)
 tree.insert(8)
 tree.insert(20);
 
-tree.BFS();
+tree.DFS_PreOrder();
 
 
 
