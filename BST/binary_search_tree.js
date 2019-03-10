@@ -111,11 +111,33 @@ class BinarySearchTree {
 
     }
 
+    DFSPostOrder() {
+      var visited = [];
+      var current = this.root;
+
+      const traverse = (node) => {
+        if(node.left) {
+          traverse(node.left);
+        }
+        if(node.right) {
+          traverse(node.right);
+        }
+        visited.push(node.value);
+      }
+
+      traverse(current);
+
+      console.log("Visited the nodes in this order", visited);
+      return visited;
+    }
+
 }
 
 //      10
-//   5     13
-// 2  7  11  16
+//   6     15
+// 3  8      20
+
+// 3 8 7 11 20 15 10
 
 var tree = new BinarySearchTree();
 tree.insert(10)
@@ -125,7 +147,7 @@ tree.insert(3)
 tree.insert(8)
 tree.insert(20);
 
-tree.DFS_PreOrder();
+tree.DFSPostOrder();
 
 
 
