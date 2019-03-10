@@ -131,6 +131,26 @@ class BinarySearchTree {
       return visited;
     }
 
+    DFSInOrder() {
+      var visited = [];
+      var current = this.root;
+
+      const traverse = (node) => {
+        if(node.left) {
+          traverse(node.left);
+        }
+        visited.push(node.value);
+        if(node.right) {
+          traverse(node.right);
+        }
+      }
+
+      traverse(current);
+
+      console.log("Visited the nodes in this order", visited);
+      return visited;
+    }
+
 }
 
 //      10
@@ -147,7 +167,7 @@ tree.insert(3)
 tree.insert(8)
 tree.insert(20);
 
-tree.DFSPostOrder();
+tree.DFSInOrder();
 
 
 
