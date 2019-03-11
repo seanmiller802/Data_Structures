@@ -21,6 +21,40 @@ class MaxBinaryHeap {
     }
   }
 
+  extractMax() {
+    if(this.length < 1) return null;
+    const first = this.values[0];
+    const last = this.values[this.values.length - 1];
+    this.values[0] = last;
+    this.values[this.values.length - 1] = first;
+    const popped = this.values.pop();
+    this.sinkDown();
+    return popped;
+  }
+
+  sinkDown() {
+    let parentIdx = 0;
+    let leftChildIdx = (2 * parentIdx) + 1;
+    let rightChildIdx = (2 * parentIdx) + 2;
+    while(true) {
+      if(this.values[leftChildIdx] > this.values[parentIdx] || this.values[rightChildIdx] > this.values[parentIdx]) {
+        if(this.values[leftChildIdx] > this.values[rightChildIdx]) {
+          let parent = this.values[parentIdx];
+          this.values[parentIdx] = this.values[leftChildIdx];
+          this.values[leftChildIdx] = parent;
+          parentIdx = leftChildIdx;
+          break;
+        } else {
+          let parent = this.values[parentIdx];
+          this.values[parentIdx] = this.values[rightChildIdx];
+          this.values[rightChildIdx] = parent;
+          parentIdx = rightChildIdx;
+          break;
+        }
+      }
+    }
+  }
+
 
 }
 
@@ -30,4 +64,5 @@ heap.insert(120);
 heap.insert(89);
 heap.insert(101);
 heap.insert(1000);
+// heap.extractMax();
 console.log(heap);
