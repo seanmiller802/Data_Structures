@@ -16,11 +16,39 @@ class HashTable {
     if(this.keyMap[hash]) {
       for(let i=0; i < this.keyMap[hash].length; i++) {
         if(this.keyMap[hash][i][0] === key) {
-          return this.keyMap[hash][i][1];
+          return this.keyMap[hash][i];
         }
       }
     }
     return undefined;
+  }
+
+  keys() {
+    let keys = [];
+    for(let i = 0; i < this.keyMap.length; i++) {
+       if(this.keyMap[i]) {
+        for(let j = 0; j < this.keyMap[i].length; j++) {
+          if(!keys.includes(this.keyMap[i][j][0])) {
+            keys.push(this.keyMap[i][j][0]);
+          }
+        }
+      }
+    }
+    return keys;
+  }
+
+  values() {
+    let values = [];
+    for(let i = 0; i < this.keyMap.length; i++) {
+       if(this.keyMap[i]) {
+        for(let j = 0; j < this.keyMap[i].length; j++) {
+          if(!values.includes(this.keyMap[i][j][1])) {
+            values.push(this.keyMap[i][j][1]);
+          }
+        }
+      }
+    }
+    return values;
   }
 
   _hash(key) {
@@ -43,4 +71,6 @@ HT.set("salmon", "#FA8072");
 HT.set("lightcoral", "#F08080");
 HT.set("mediumvioletred", "#C71585");
 HT.set("plum", "#DDA0DD");
-console.log(HT.get("maroon"));
+HT.set("plum", "#DDA0DD");
+console.log(HT.keys());
+console.log(HT.values());
