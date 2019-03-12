@@ -1,29 +1,37 @@
 class Graph {
   constructor() {
-    this.ajacencyList = {};
+    this.adjacencyList = {};
   }
 
   addVertex(vertex) {
-    if(!this.ajacencyList[vertex]) {
-      this.ajacencyList[vertex] = [];
+    if(!this.adjacencyList[vertex]) {
+      this.adjacencyList[vertex] = [];
     }
   }
 
   addEdge(vertex1, vertex2) {
-    this.ajacencyList[vertex1].push(vertex2);
-    this.ajacencyList[vertex2].push(vertex1);
+    this.adjacencyList[vertex1].push(vertex2);
+    this.adjacencyList[vertex2].push(vertex1);
   }
 
   removeEdge(vertex1, vertex2) {
 
-    this.ajacencyList[vertex1] = this.ajacencyList[vertex1].filter(
+    this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
       v => v !== vertex2
     );
 
-    this.ajacencyList[vertex2] = this.ajacencyList[vertex2].filter(
+    this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
       v => v !== vertex1
     );
-    
+
+  }
+
+  removeVertex(vertex) {
+    while(this.adjacencyList[vertex].length) {
+      const adjacentVertex = this.adjacencyList[vertex].pop();
+      this.removeEdge(vertex, adjacentVertex);
+    }
+    delete this.adjacencyList[vertex];
   }
 }
 
@@ -32,7 +40,9 @@ var g = new Graph();
 g.addVertex('pineapple');
 g.addVertex('apple');
 g.addVertex('watermelon');
+g.addVertex('carrot');
 g.addEdge('pineapple', 'apple');
 g.addEdge('watermelon', 'apple');
-g.removeEdge('watermelon', 'apple');
+g.addEdge('watermelon', 'carrot');
+g.removeVertex('carrot');
 console.log(g);
