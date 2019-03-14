@@ -33,16 +33,66 @@ class Graph {
     }
     delete this.adjacencyList[vertex];
   }
+
+  DFS_Recursive(vertex) {
+    let results = [];
+    let visited = {};
+
+    const dfs = (vertex) => {
+      if(!vertex) return null;
+      visited[vertex] = true;
+      results.push(vertex);
+      
+      this.adjacencyList[vertex].forEach(neighbor => {
+        if(!visited[neighbor]) {
+          return dfs(neighbor);
+        }
+      });
+
+    } 
+
+    dfs(vertex);
+    console.log("Final results are:", results);
+    return results;
+  }
+
+  DFS_Iterative(vertex) {
+    let visited = {};
+    let results = [];
+    let s = [];
+    s.push(vertex);
+    while(s.length > 0) {
+      const node = s.pop();
+      if(!visited[node]) {
+        visited[node] = true;
+        results.push(node);
+        this.adjacencyList[node].forEach(neighbor => {
+          s.push(neighbor);
+        })
+      }
+    }
+    console.log("Final results are:", results);
+    return results;
+  }
 }
 
 var g = new Graph();
 
-g.addVertex('pineapple');
-g.addVertex('apple');
-g.addVertex('watermelon');
-g.addVertex('carrot');
-g.addEdge('pineapple', 'apple');
-g.addEdge('watermelon', 'apple');
-g.addEdge('watermelon', 'carrot');
-g.removeVertex('carrot');
+g.addVertex("A");
+g.addVertex("B");
+g.addVertex("C");
+g.addVertex("D");
+g.addVertex("E");
+g.addVertex("F");
+
+g.addEdge("A", "B");
+g.addEdge("A", "C");
+g.addEdge("B", "D");
+g.addEdge("C", "E");
+g.addEdge("D", "E");
+g.addEdge("D", "F");
+g.addEdge("E", "F");
+
+g.DFS_Iterative("A");
+
 console.log(g);
