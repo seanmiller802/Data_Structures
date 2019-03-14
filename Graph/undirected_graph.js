@@ -74,6 +74,26 @@ class Graph {
     console.log("Final results are:", results);
     return results;
   }
+
+  BFS(vertex) {
+    let queue = [vertex];
+    let visited = {};
+    let results = [];
+    let current;
+    visited[vertex] = true;
+    while(queue.length) {
+      current = queue.shift();
+      results.push(current);
+      this.adjacencyList[current].forEach(neighbor => {
+        if(!visited[neighbor]) {
+          visited[neighbor] = true;
+          queue.push(neighbor);
+        }
+      })
+    }
+    console.log("Final results are:", results);
+    return results;
+  }
 }
 
 var g = new Graph();
@@ -93,6 +113,6 @@ g.addEdge("D", "E");
 g.addEdge("D", "F");
 g.addEdge("E", "F");
 
-g.DFS_Iterative("A");
+g.BFS("A");
 
 console.log(g);
